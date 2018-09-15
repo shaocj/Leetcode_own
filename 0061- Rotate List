@@ -1,0 +1,84 @@
+1、C
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode *rotateRight(struct ListNode *head, int k) {
+    if (!head || k == 0) return head;
+
+	struct ListNode* tail = head;
+	int n = 1;
+	while (tail->next)
+	{
+		tail = tail->next;
+		n++;
+	}
+ 
+	k = k%n;		
+	if (k == 0) 
+        return head;
+	k = n - k;
+      tail->next = head;
+	struct ListNode *newHead = head;
+
+	for (int i = 0; i < k - 1; i++)
+		newHead = newHead->next;
+		
+	head = newHead->next;
+	newHead->next = NULL;
+	return head;
+}
+2、python
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution(object):
+  
+    def rotateRight(self, head, k):
+        """
+        :type head: ListNode
+        :type k: int
+        :rtype: ListNode
+        """
+        if not head:
+            return None
+
+        if head.next == None:
+            return head
+
+        pointer = head
+        length = 1
+
+        while pointer.next:
+            pointer = pointer.next
+            length += 1
+
+        rotateTimes = k%length
+
+        if k == 0 or rotateTimes == 0:
+            return head
+
+        fastPointer = head
+        slowPointer = head
+
+        for a in range (rotateTimes):
+            fastPointer = fastPointer.next
+
+
+        while fastPointer.next:
+            slowPointer = slowPointer.next
+            fastPointer = fastPointer.next
+
+        temp = slowPointer.next
+
+        slowPointer.next = None
+        fastPointer.next = head
+        head = temp
+
+        return head
