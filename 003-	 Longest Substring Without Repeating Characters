@@ -1,0 +1,34 @@
+1、C 
+int lengthOfLongestSubstring(char* s) {
+    int letters[128]={0},max=0;
+    char* head=s,*tail=s;
+    while (*tail) {
+        if (letters[*tail]) {
+            max = (tail-head>max) ? tail-head : max;
+            while (*head!=*tail) 
+                letters[*head++]=0;
+            head++;
+            tail++;
+        } 
+        else 
+            letters[*tail++]=1;
+    }
+     max=(max>tail-head) ? max : tail-head;
+    return max;
+}
+2、python
+class Solution:
+    # @return an integer
+    def lengthOfLongestSubstring(self, s):
+        start = maxLength = 0
+        usedChar = {}
+        
+        for i in range(len(s)):
+            if s[i] in usedChar and start <= usedChar[s[i]]:
+                start = usedChar[s[i]] + 1
+            else:
+                maxLength = max(maxLength, i - start + 1)
+
+            usedChar[s[i]] = i
+
+        return maxLength
