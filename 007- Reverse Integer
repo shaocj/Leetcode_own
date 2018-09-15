@@ -1,0 +1,23 @@
+1、C
+int reverse(int x) {
+    long long val = 0;
+	do 
+	{
+		val = val * 10 + x % 10;
+		x /= 10;
+	} while (x);
+	
+	return (val > INT_MAX || val < INT_MIN) ? 0 : val;
+}
+2、python
+class Solution:
+    def reverse(self, x):
+        """
+        :type x: int
+        :rtype: int
+        """
+        reverse_num=int(str(abs(x))[::-1])
+        if reverse_num.bit_length() > 31:
+            return 0
+        else:
+            return reverse_num if x > 0 else -reverse_num
