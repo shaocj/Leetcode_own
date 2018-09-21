@@ -141,3 +141,4 @@ class Solution(object):
             index += step
 
         return ''.join(L)
+ https://blog.csdn.net/xinxin100011/article/details/81258144
