@@ -25,7 +25,7 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 		struct ListNode* p2 = l2;
 		struct ListNode* ans = (struct ListNode*)malloc(sizeof(struct ListNode));
 		ans->val = 0;
-		struct ListNode* p = 0;
+		struct ListNode* p = NULL;
 		int c = 0;
 		while (p1 != NULL || p2 != NULL || c != 0) {
 			if (p == NULL) {
