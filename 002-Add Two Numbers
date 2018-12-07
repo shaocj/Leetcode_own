@@ -27,8 +27,8 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 		ans->val = 0;
 		struct ListNode* p = 0;
 		int c = 0;
-		while (p1 != 0 || p2 != 0 || c != 0) {
-			if (p == 0) {
+		while (p1 != NULL || p2 != NULL || c != 0) {
+			if (p == NULL) {
 				p = ans;
 			}
 			else {
@@ -41,11 +41,11 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 			int s = (a + b + c) % 10;
 			c = (a + b + c) / 10;
 			p->val = s;
-			p->next = 0;
+			p->next = NULL;
             //p1 = p1->next;
             //p2 = p2->next;
-			p1 = p1 == 0 ? 0 : p1->next;
-			p2 = p2 == 0 ? 0 : p2->next;
+			p1 = p1 == NULL ? NULL : p1->next;
+			p2 = p2 == NULL ? NULL : p2->next;
 		}
 		return ans;
 }
