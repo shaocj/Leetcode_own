@@ -19,7 +19,7 @@ class Solution:
         """
         if x<0 or (x!=0 and x%10==0):
             return False
-        y = int(str(x)[::-1])
+        y = int(str(x)[::-1])//https://www.cnblogs.com/mxh1099/p/5804064.html
         return True if x == y else False
 #2
 class Solution:
