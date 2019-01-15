@@ -1,0 +1,43 @@
+C:
+char* longestCommonPrefix(char** strs, int strsSize) {
+if (strs == NULL || *strs == NULL)
+    return "";
+    
+int len = strlen(strs[0]);
+int max = 0, loop = 1, i;
+char* ps = strs[0], *ret;
+
+while(max < len) {
+    for (i = 1; i < strsSize; i++) {
+        if (strs[i][max] != strs[0][max]) {
+            len = max;
+            break;
+        }
+    }
+    if (max < len) max++;
+}
+
+ret = (char*)malloc(sizeof(char)*(max+1));
+for (i = 0; i < max; i++) ret[i] = strs[0][i];
+
+ret[max] = '\0';
+
+return ret;
+}
+
+
+Ptyhon:
+class Solution:
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        if not strs:
+            return ""
+            
+        for i, letter_group in enumerate(zip(*strs)):
+            if len(set(letter_group)) > 1:
+                return strs[0][:i]
+        else:
+            return min(strs)
