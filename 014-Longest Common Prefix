@@ -41,3 +41,21 @@ class Solution:
                 return strs[0][:i]
         else:
             return min(strs)
+注：for i, letter_group in enumerate(zip(*str)):
+    print(i,letter_group)
+    print(set(letter_group))
+    if len(set(letter_group)) > 1:
+        print(str[0][:i])
+else:
+    print(min(str))
+ 输出：0 ('f', 'f', 'f')
+    {'f'}
+    1 ('l', 'l', 'l')
+    {'l'}
+    2 ('o', 'o', 'i')
+    {'o', 'i'}
+    fl
+    3 ('w', 'w', 'g')
+    {'g', 'w'}
+    flo
+    flight
