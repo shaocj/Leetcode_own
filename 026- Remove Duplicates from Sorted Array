@@ -1,0 +1,18 @@
+int removeDuplicates(int* nums, int numsSize) {
+    int labels[128] = {0};
+    int i;
+    int j=0,length=0;
+    int* arr = (int*)malloc(sizeof(int)*128);
+    for(i=0;i<numsSize;i++)
+    {
+        if(labels[nums[i]] == 0)
+        {
+            labels[nums[i]]=1;
+            arr[j++]=nums[i];
+            ++length;
+            
+        }
+    }
+   
+    return length;
+}
