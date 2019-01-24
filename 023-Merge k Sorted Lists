@@ -103,6 +103,26 @@ L = LinkList()
 lists = [L.InitList([1,4,5]),L.InitList([1,3,4]),L.InitList([2,6])]
 lists
 
+调试2：
+
+class Node(object):
+	#"数据域"
+	def __init__(self, data):
+		self.data = data
+		self.next = None
+def InitList(data):
+	#"单链表的初始化"
+	head = Node(data[0])
+	p = head
+	for x in data[1:]:
+		node = Node(x)
+		# 注意下面两句话的顺序，不要弄颠倒，首先要让p指向node，然后再把它重新赋值给p，这样才完成了对p的更新
+		p.next = node
+		p = p.next
+	p = head.next
+	return p
+lists=[InitList([1,4])]
+lists
 
 from operator import attrgetter
 
