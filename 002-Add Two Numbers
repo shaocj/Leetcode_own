@@ -25,29 +25,30 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
 		struct ListNode* p2 = l2;
 		struct ListNode* ans = (struct ListNode*)malloc(sizeof(struct ListNode));
 		ans->val = 0;
-		struct ListNode* p = NULL;
 		int c = 0;
+        struct ListNode* p = ans;
 		while (p1 != NULL || p2 != NULL || c != 0) {
-			if (p == NULL) {
-				p = ans;
-			}
-			else {
-				p->next = (struct ListNode*)malloc(sizeof(struct ListNode));
-				p->next->val = 0;
-				p = p->next;
-			}
-			int a = p1 != 0 ? p1->val : 0;
-			int b = p2 != 0 ? p2->val : 0;
+           
+			p->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+			//p->next->val = 0;
+			p = p->next;
+		
+           // int a = p1->val;
+           // int b = p2->val;
+			//int a = p1 != 0 ? p1->val : 0;
+			//int b = p2 != 0 ? p2->val : 0;
+            int a = p1->val;
+            int b = p2->val;
 			int s = (a + b + c) % 10;
 			c = (a + b + c) / 10;
 			p->val = s;
-			p->next = NULL;
+            //p->next = NULL;
             //p1 = p1->next;
             //p2 = p2->next;
 			p1 = p1 == NULL ? NULL : p1->next;
 			p2 = p2 == NULL ? NULL : p2->next;
 		}
-		return ans;
+		return ans->next;
 }
 2、python
 # Definition for singly-linked list.
