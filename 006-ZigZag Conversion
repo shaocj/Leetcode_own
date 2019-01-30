@@ -6,7 +6,8 @@ char * convert(char* s, int numRows)
 {
     int len, w = (numRows - 2) * 2 + 2, i, t1, t2, r = numRows;
     //w = (numRows-1)*2
-    int cnt = (2 * r) - 3, c, j;
+    int cnt = (2 * r) - 3;#cnt=((2*r-2)/2-1)*2+1=(w/2-1)/2+1
+    int c, j;
     char *ns;
 
     /* Maintain Sanity */
