@@ -82,3 +82,93 @@ class Solution(object):
         head = temp
 
         return head
+/***********************************************
+在codeblocks正确实现代码：
+************************************************/
+#include <stdio.h>
+#include <stdlib.h>
+
+#define LIST_INIT_SIZE    5
+typedef struct ListNode
+{
+    int val;
+    struct ListNode *next;
+}ListNode,*LinkList;
+LinkList InitListNode(LinkList L)
+{
+    L = (LinkList) malloc(sizeof(ListNode));
+    L->next = NULL;
+    return L;
+}
+LinkList rotateRight(LinkList head, int k) {
+    if (!head || k == 0) return head;
+
+	LinkList tail = head->next;
+	int n = 1;
+	while (tail->next)
+	{
+		tail = tail->next;
+		n++;
+	}
+
+	k = k%n;
+	if (k == 0)
+        return head;
+	k = n - k;
+    tail->next = head->next;
+	LinkList newHead = head->next;
+
+	for (int i = 0; i < k - 1; i++)
+		newHead = newHead->next;
+
+	head->next = newHead->next;
+	newHead->next = NULL;
+	return head;
+}
+void CreateList_L(LinkList L, int n)
+{
+
+    int i;
+    int v;
+    LinkList p,l;
+
+    //循环录入数据
+    for (i = 0; i<n; i++)
+    {
+        p = (LinkList) malloc(sizeof(ListNode));
+        scanf("%d", &v);
+        p->val = v;
+        p->next = L->next;  //头插法
+       L->next = p;
+    }
+}
+
+int PrintList_L(LinkList L, char* s){
+   LinkList p;
+    printf("%s", s);
+    p = L->next;
+    if (p == NULL)
+    {
+        printf("链表为空\n");
+        return 0;
+    }
+    while (p != NULL){
+        printf("%d   ", p->val);
+        p = p->next;
+    }
+    printf("\n");
+    return 1;
+}
+
+int main(void)
+{
+    LinkList L,P,R;
+    printf("请输入链表中初始的%d个数据：", LIST_INIT_SIZE);
+    R=InitListNode(L);
+    CreateList_L(R, LIST_INIT_SIZE);
+    PrintList_L(R,"初始化的链表：");
+    P=rotateRight(R,2);
+     PrintList_L(P,"反转后的链表：");
+    printf("Hello world!\n");
+    return 0;
+}
