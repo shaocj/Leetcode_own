@@ -86,6 +86,7 @@ class Solution(object):
 在codeblocks正确实现代码：
 ************************************************/
 #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 #define LIST_INIT_SIZE    5
@@ -131,6 +132,7 @@ void CreateList_L(LinkList L, int n)
     int i;
     int v;
     LinkList p,l;
+    l=L;
 
     //循环录入数据
     for (i = 0; i<n; i++)
@@ -138,9 +140,10 @@ void CreateList_L(LinkList L, int n)
         p = (LinkList) malloc(sizeof(ListNode));
         scanf("%d", &v);
         p->val = v;
-        p->next = L->next;  //头插法
-       L->next = p;
+        l->next = p;  //尾插法
+        l = p;
     }
+    p->next = NULL;
 }
 
 int PrintList_L(LinkList L, char* s){
