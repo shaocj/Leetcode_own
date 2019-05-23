@@ -1,0 +1,31 @@
+C:
+
+bool isValid(char *s) {
+    char *flag = (char *)malloc(strlen(s));
+    int pos = 0;
+    while(*s) {
+        switch (*s) {
+            case '(':
+            case '{':
+            case '[':
+                flag[pos++] = *s;
+                break;
+            case ')':
+                if (flag[pos-1] == '(') --pos;
+                else return false;
+                break;
+            case '}':
+                if (flag[pos-1] == '{') --pos;
+                else return false;
+                break;
+            case ']':
+                if (flag[pos-1] == '[') --pos;
+                else return false;
+                break;
+        }
+        ++s;
+    }
+    return pos == 0;
+}
+
+2、Pyhton:
