@@ -30,3 +30,37 @@ struct ListNode* swapPairs(struct ListNode* head) {
     }
     return head;
 }
+3、
+struct ListNode* swapPairs(struct ListNode* head) {
+   struct ListNode* current,*pre,*scount;
+    pre=NULL;
+    scount=current=head;
+    int count=0;
+    while(scount)
+    {
+        count++;
+        if(count == 2)
+        {
+            scount=scount->next;
+            struct ListNode *flow,*first;
+            first=current;
+            while(count-- >1)
+            {
+                flow=current->next;
+                current->next=flow->next;
+                flow->next=first;
+                first=flow;
+            }
+            if(pre)
+                pre->next = first;
+            else
+                head=first;
+            pre=current;
+            current=current->next;
+            count=0;
+        }
+        else
+            scount=scount->next;
+    }
+    return head;
+}
