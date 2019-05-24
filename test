@@ -1,0 +1,62 @@
+void getnext(char* needle,int nLength,int* next)
+{
+    next[0]=-1;
+    int k=-1;
+    int j=0;
+    while(j<nLength-1)
+    {
+        if(k=-1||needle[k]==needle[j])
+        {
+            k++;
+            j++;
+            if(needle[k] == needle[j])
+                next[j]=next[k];
+            else
+                next[j]=k;
+        }
+        else
+            k=next[k];
+    }
+}
+
+int strStr(char* haystack, char* needle) {
+    int i=0;
+    int j=0;
+    int next[100];
+    int hLength=0,nLength=0;
+    /*
+    hLength=strlen(haystack);
+    nLength=strlen(needle);
+    */
+    while(*haystack != '\n')
+    {
+        hLength++;
+        haystack++;
+    }
+    while(*needle != '\n')
+    {
+        nLength++;
+        needle++;
+    }
+    getnext(needle,nLength,next);
+    while(i < hLength && j < nLength)
+    {
+        if(j==-1||haystack[i]==needle[j])
+        {
+            i++;
+            j++;
+        }
+        else
+            j=next[j];
+    }
+    if(j>nLength-1)
+        return i-nLength;
+}
+int main()
+{
+    char haystack[6] = "hello",needle[3] = "ll";
+    int l;
+    l = strStr(haystack,needle);
+    printf("l=%d\n",l);
+    return 0;
+}
