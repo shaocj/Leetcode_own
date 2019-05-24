@@ -1,0 +1,26 @@
+C:
+int removeElement(int* nums, int numsSize, int val) {
+    int i, j;
+    for(i = j = numsSize - 1; i >= 0; i--)
+        if(nums[i] == val && i != j--)
+            nums[i] = nums[j+1] ;
+    return j+1;
+    
+}
+C++
+int removeElement(int a[], int n, int elem) {
+        int count = 0;
+        for (int i = 0; i < n; ++i) {
+            if (a[i] != elem) {
+                a[count++] = a[i];
+            }
+        }
+        return count;
+    }
+python
+class Solution(object):
+    def removeElement(self, nums, val):
+        for x in nums[:]:
+            if x == val:
+                nums.remove(val)
+        return len(nums)
