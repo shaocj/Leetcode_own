@@ -48,6 +48,9 @@ int isValidSudoku(char** board, int boardRowSize, int boardColSize) {
 }
 int main()
 {
+
+注意：二维字符串数组初始化方法：
+char a[2][2]={"1234d","edd"}等于a[2][2]={{'1','2','3','4','d'},{'e','d','d'}}
     char nums[9][9]={
   {'5','3','.','.','7','.','.','.','.'},
   {'6','.','.','1','9','5','.','.','.'},
