@@ -1,0 +1,28 @@
+1、python:
+class Solution:
+    def searchInsert(self, nums, target):
+        return bisect.bisect_left(nums,target)
+ 2、C:
+ int searchInsert(int* nums, int numsSize, int target) { 
+	if(0==numsSize) return 0;
+
+	int p1=0;
+	int p2=numsSize-1;
+	int cur;
+
+	while(p1<=p2){
+		cur=(p1+p2)/2;
+		if(target==nums[cur]){
+			break;
+		}
+		if(target<nums[cur]){
+			p2=cur-1;
+		}else{
+			p1=cur+1;
+		}
+	}
+	if(target>nums[cur]){
+		++cur;
+	}
+	return cur;
+}
