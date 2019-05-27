@@ -1,0 +1,59 @@
+c：
+1、int removeDuplicates(int* nums, int numsSize) {
+    if(numsSize < 2)
+        return numsSize;
+    
+    int cnt = 1;
+    int j = 1;
+    for(int i = 1; i < numsSize; i++)
+    {
+        if(nums[i] == nums[i - 1])
+        {
+            cnt++;
+            if(cnt < 3)
+            {
+                nums[j++] = nums[i];
+            }
+        }
+        else
+        {
+            nums[j++] = nums[i];
+            cnt = 1;
+        }
+    }
+    return j;
+    
+}
+2、int removeDuplicates(int* nums, int numsSize) {
+    int labels[128] = {0};
+    int i;
+    int j=0,length=0,len=1;
+    int* arr = (int*)malloc(sizeof(int)*128);
+    for(i=0;i<numsSize;i++)
+    {
+        if(labels[nums[i]] == 0)
+        {
+            labels[nums[i]]=1;
+            arr[j++]=nums[i];
+            ++length;
+
+        }
+        else
+        {
+
+            if(len < 2)
+            {
+                arr[j++]=nums[i];
+                len++;
+                ++length;
+            }
+            else
+                len=1;
+        }
+    }
+    int x;
+    for(x=0;x<length;x++)
+        printf("arr=%d ",arr[x]);
+
+    return length;
+}
