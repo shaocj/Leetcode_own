@@ -1,0 +1,319 @@
+https://www.cnblogs.com/linuxAndMcu/p/7391546.html
+
+
+三种访问权限
+
+public:可以被任意实体访问
+
+protected:只允许子类及本类的成员函数访问
+
+private:只允许本类的成员函数访问
+
+ 
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+#include <iostream>
+#include <string>
+ 
+using namespace std;
+ 
+//1、private:只能在本类中访问（1）(缺省的),
+//2、protected:能在本类、子类中访问（2）
+//3、public:能在本类、子类、类外中访问（3）
+ 
+class student
+{
+public:
+    string name;
+protected:
+    int age;
+private:
+    char sex;
+ 
+public:
+    student(){}
+    student(string name,int age,char sex)
+    {
+        this->name = name;
+        this->age = age;
+        this->sex = sex;
+    }
+ 
+    void showStu()
+    {
+        cout << this->name << endl; //1、在本类能够访问类的公有数据成员
+        cout << this->age << endl;  //1、在本类能够访问类的保护数据成员
+        cout << this->sex << endl;  //1、在本类能够访问类的私有数据成员
+    }
+};
+ 
+class Sub : public student
+{
+public:
+    void show()
+    {
+        cout << this->name << endl; //2、在子类中能够访问父类的公有数据成员
+        cout << this->age << endl;  //2、在子类中能够访问父类的保护数据成员
+　　　　//cout << this->sex << endl;  //error:2、在子类中不能访问父类的私有数据成员
+    }
+};
+ 
+//类外
+void showStudent(const student &stu)
+{
+    cout << stu.name << endl;   //3、在类外可以访问类的公有数据成员
+　　//cout << stu.age << endl;    //error,3、在类外不能访问类的保护数据成员
+　　//cout << stu.sex << endl;    //error,3、在类外不能访问类的私有数据成员
+}
+ 
+int main()
+{
+    student stu;
+}
+ 
+
+三种继承方式
+
+public 继承
+
+protect 继承
+
+private 继承
+
+ 
+
+组合结果
+
+基类中 继承方式 子类中
+
+public ＆ public继承 => public
+
+public ＆ protected继承 => protected
+
+public ＆ private继承 = > private
+
+ 
+
+protected ＆ public继承 => protected
+
+protected ＆ protected继承 => protected
+
+protected ＆ private继承 = > private
+
+ 
+
+private ＆ public继承 => 子类无权访问
+
+private ＆ protected继承 => 子类无权访问
+
+private ＆ private继承 = > 子类无权访问
+
+ 
+
+但无论哪种继承方式，上面两点都没有改变：
+
+1.private 成员只能被本类成员（类内）和友元访问，不能被派生类访问；
+
+2.protected 成员可以被派生类访问。
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+ 
+using namespace std;
+ 
+class student
+{
+public:
+    string name;
+protected:
+    int age;
+private:
+    char sex;
+};
+ 
+//public继承，父类中的方法属性不发生改变
+class public_Sub : public student
+{
+public:
+    void show()
+    {
+        cout << this->name << endl; //name在子类中仍然为public，可以访问
+        cout << this->age << endl;  //age在子类中仍然为protected，可以访问
+        //cout << this->sex << endl;  //error: sex在子类中仍然为private，不能访问
+    }
+};
+ 
+//protected继承，父类的protected和public方法在子类中变为protected，private方法不变;
+class protected_Sub : protected student
+{
+public:
+        //name在子类中变为protected，age和sex的权限不变
+};
+ 
+//private继承,父类的所有方法在子类中变为private
+class private_Sub : private student
+{
+public:
+        //name、age、sex在子类中都变为private
+};
+//------------
+//public继承
+class Double_Sub : public private_Sub
+{
+public:
+    void show()
+    {
+        //cout << this->name << endl; //error: name在子类中仍然为private，可以访问
+        //cout << this->age << endl;  //error: age在子类中仍然为private，可以访问
+        //cout << this->sex << endl;  //error: sex在子类中仍然为private，不能访问
+    }
+};
+ 
+int main()
+{
+    public_Sub stu1;
+    protected_Sub stu2;
+    private_Sub stu3;
+}
+　　
+
+由以上组合结果可以看出
+
+1、public继承不改变基类成员的访问权限
+
+2、private继承使得基类所有成员在子类中的访问权限变为private
+
+3、protected继承将基类中public成员变为子类的protected成员，其它成员的访问权限不变。
+
+4、基类中的private成员不受继承方式的影响，子类永远无权访问(使用using也不行)。
+
+ 
+
+ 
+
+c++ 中为什么要定义public protect private 三种访问权限？
+
+有些我们需要给外面看的，也就是对外接口，那么就是public。如果我们不想让别人知道内部的实现细节，那么就是private。如果我们不想让别人知道，想让自己的孩子什么的知道（这里涉及到继承），那么就可以作为protected。
+
+这样的话，private是自己私有的，protected是可以让孩子知道的，public是公开的！
+
+分类: C++课程学习
