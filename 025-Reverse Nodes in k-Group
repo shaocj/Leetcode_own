@@ -33,7 +33,7 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k) {
                 head = first;
                 
             previous = current;
-            current = scout;
+            current=current->next;
             count = 0;
         }
         else
