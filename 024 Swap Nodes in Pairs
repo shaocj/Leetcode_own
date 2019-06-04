@@ -16,20 +16,6 @@ struct ListNode* swapPairs(struct ListNode* head){
     tmp->next=head;
     return tmp;
 }
-2、
-struct ListNode* swapPairs(struct ListNode* head) {
-    struct ListNode *prev = NULL, *first = head, *second = NULL;
-    for (; first && (second = first->next); prev = first, first = first->next) {
-        first->next = second->next;
-        second->next = first;
-        if (prev) {
-            prev->next = second;
-        } else {
-            head = second;
-        }
-    }
-    return head;
-}
 3、
 struct ListNode* swapPairs(struct ListNode* head) {
    struct ListNode* current,*pre,*scount;
