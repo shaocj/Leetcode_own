@@ -1,0 +1,12 @@
+ int maxSubArray(vector<int>& nums) 
+    {
+        int local=nums[0];//存储每一个阶段的最优解
+        int global=nums[0];//存储整个过程能得到的最大sum
+        for(int i=1;i<nums.size();i++)//从i=1开始
+        {
+            local=max(local+nums[i],nums[i]);//选择要“延续”还是“重新开始”
+            global=max(global,local);
+        }
+        return global;
+        
+    }
