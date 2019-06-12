@@ -89,6 +89,8 @@ char * convert(char* s, int numRows)
     free(ns);
     return s;
 }
+
+
 2、c
 char* convert(char* s, int numRows) {
 int n=strlen(s);
@@ -111,14 +113,24 @@ for(int i=0;i<numRows;i++)
 a[k]='\0';
    return a;
 }
+
 2、C++
-string convert(string s, int numRows) {
-    string ans = s;
-    for (int i = 0, cnt = 0;i < numRows;++i)
-        for (int j = i, c = 0;j < s.size();j += max(((i!=numRows-1&&(i==0 || ++c % 2))?(numRows-1)*2-2*i:2*i),1))
-            ans[cnt++] = s[j];
-    return ans;
-}
+class Solution {
+public:
+    string convert(string s, int nRows) {
+        if (nRows <= 1) return s;
+        string res = "";
+        int size = 2 * nRows - 2;
+        for (int i = 0; i < nRows; ++i) {
+            for (int j = i; j < s.size(); j += size) {
+                res += s[j];
+                int tmp = j + size - 2 * i;
+                if (i != 0 && i != nRows - 1 && tmp < s.size()) res += s[tmp];
+            }
+        }
+        return res;
+    }
+};
 4、python
 class Solution(object):
     def convert(self, s, numRows):
