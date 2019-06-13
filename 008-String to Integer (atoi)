@@ -1,4 +1,8 @@
 1、C
+/**
+32位int的最大值 2147483647 的最后一位
+即 7 == INT_MAX % 10
+**/
 int myAtoi(const char *str)
 {
     const char *p = str;
