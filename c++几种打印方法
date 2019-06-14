@@ -1,0 +1,24 @@
+    /*打印方法1
+    vector<string>::iterator begin = res.begin();
+    vector<string>::iterator end = res.end();
+    for_each(begin,end,print);
+    cout<<endl;
+    */
+    /*打印方2
+    int i ;
+    for( i=0 ;i<res.size();i++)
+        cout<<res[i]<<" ";
+
+    cout<<endl;
+    */
+    /*打印方法3
+    ostream_iterator<string>out(cout," ");
+    for(auto e :res)
+        *out++=e;
+    cout<<endl;
+    */
+    /*打印方法4
+    ostream_iterator<string>out(cout," ");
+    copy(res.begin(),res.end(),out);
+    cout<<endl;
+    */
