@@ -17,3 +17,63 @@ public:
         }
     }
 }; 
+
+
+/**********************************************************************************/
+#include <iostream>
+#include <vector>
+#include <iterator>
+#include <algorithm>
+using namespace std;
+
+vector<string> letterCombinations(string digits) {
+    if (digits.empty()) return {};
+    vector<string> res{""};
+    vector<string> dict{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    for (int i = 0; i < digits.size(); ++i) {
+        vector<string> t;
+        string str = dict[digits[i] - '0'];
+        for (int j = 0; j < str.size(); ++j) {
+            for (string s : res) t.push_back(s + str[j]);
+        }
+        res = t;
+    }
+    return res;
+
+}
+void print(string v)
+{
+    cout<<v<<'\t';
+}
+int main()
+{
+    string digits;
+    cin >> digits ;
+    vector<string> res;
+    res = letterCombinations(digits);
+    /*打印方法1
+    vector<string>::iterator begin = res.begin();
+    vector<string>::iterator end = res.end();
+    for_each(begin,end,print);
+    cout<<endl;
+    */
+    /*打印方2
+    int i ;
+    for( i=0 ;i<res.size();i++)
+        cout<<res[i]<<" ";
+
+    cout<<endl;
+    */
+    /*打印方法3
+    ostream_iterator<string>out(cout," ");
+    for(auto e :res)
+        *out++=e;
+    cout<<endl;
+    */
+    /*打印方法4
+    ostream_iterator<string>out(cout," ");
+    copy(res.begin(),res.end(),out);
+    cout<<endl;
+    */
+    return 0;
+}
