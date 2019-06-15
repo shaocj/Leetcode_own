@@ -18,6 +18,8 @@ public:
         }
     }
 };
+
+https://www.cnblogs.com/huntfor/p/3849611.html
 打印：：
 
 i=0 start=0 target=7=>[ 2]
