@@ -1,0 +1,44 @@
+C++:
+https://www.cnblogs.com/grandyang/p/4444160.html
+1 、class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        generateParenthesisDFS(n, n, "", res);
+        return res;
+    }
+    void generateParenthesisDFS(int left, int right, string out, vector<string> &res) {
+        if (left > right) return;
+        if (left == 0 && right == 0) res.push_back(out);
+        else {
+            if (left > 0) generateParenthesisDFS(left - 1, right, out + '(', res);
+            if (right > 0) generateParenthesisDFS(left, right - 1, out + ')', res);
+        }
+    }
+};
+
+2、
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        // Write your code here
+        vector<string> res;
+        string out;
+        dfs(n, 0, 0, out, res);
+        return res;
+    }
+    void dfs(int n, int left, int right, string &out, vector<string> &res) {
+        if (left < n) { //Keep 塞左括号
+            out.push_back('(');
+            dfs(n, left + 1, right, out, res);
+            out.pop_back();
+        }
+        if (right < left) { //避免出现右括号多余左括号的情况
+            out.push_back(')');
+            dfs(n, left, right + 1, out, res);
+            out.pop_back();
+        }
+        if (out.size() == n * 2)
+            res.push_back(out);
+    }
+};
