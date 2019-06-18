@@ -1,6 +1,6 @@
 https://www.cnblogs.com/grandyang/p/4395356.html
 https://www.cnblogs.com/TenosDoIt/p/3735309.html
-
+1\
 class Solution {
 public:
     string multiply(string num1, string num2) {
@@ -19,5 +19,35 @@ public:
             if (!res.empty() || val != 0) res.push_back(val + '0');
         }
         return res.empty() ? "0" : res;
+    }
+};
+2\
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        int n1 = num1.size(), n2 = num2.size();
+        vector<int> tmpres(n1+n2, 0);
+        int k = n1 + n2 - 2;
+        for(int i = 0; i < n1; i++)
+            for(int j = 0; j < n2; j++)
+            {
+                tmpres[k-i-j] += (num1[i]-'0')*(num2[j]-'0');
+                printf("i=%d ,j=%d ,num1[i]=%d ,num2[j]=%d\n",i,j,num1[i]-'0',num2[j]-'0');
+            }
+        int carryBit = 0;
+        for(int i = 0; i < n1+n2; i++)//处理进位
+        {
+            tmpres[i] += carryBit;
+            //printf("i=%d ,tmppres[i]=%d\n",i,tmpres[i]);
+            carryBit = tmpres[i] / 10;
+            tmpres[i] %= 10;
+        }
+        int i = k+1;
+        while(tmpres[i] == 0)i--;//去掉乘积的前导0
+        if(i < 0)return "0"; //注意乘积为0的特殊情况
+        string res;
+        for(; i >= 0; i--)
+            res.push_back(tmpres[i] + '0');
+        return res;
     }
 };
