@@ -1,3 +1,22 @@
+1、没有限制空间复杂度
+// NOT constant space
+class Solution {
+public:
+    int firstMissingPositive(vector<int>& nums) {
+        int mx = 0;
+        unordered_set<int> s;
+        for (int num : nums) {
+            if (num <= 0) continue;
+            s.insert(num);
+            mx = max(mx, num);
+        }
+        for (int i = 1; i <= mx; ++i) {
+            if (!s.count(i)) return i;
+        }
+        return mx + 1;
+    }
+};
+2、
 class Solution {
 public:
     int firstMissingPositive(vector<int>& nums) {
