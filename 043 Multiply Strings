@@ -1,6 +1,53 @@
+1、karatsuba乘法-分治算法
+https://wapbaike.baidu.com/item/karatsuba%E4%B9%98%E6%B3%95?uid=E06CC90AB91510ED1E00FAB0EC7472D8&bd_page_type=1&st=1&step=2&net=0&bk_fr=bk_srch
+https://blog.csdn.net/applehth/article/details/69659837
+
+#include<iostream>
+#include<cmath>
+#include<stdio.h> 
+using namespace std;
+ 
+//找到x的位数  
+int size(long x){  
+    int num=0;  
+    do{  
+        num++;  
+        x=x/10;  
+    }while(x);  
+    return num;  
+}  
+ 
+long Karatsuba(long x,long y)
+{
+	if(x<10 || y<10) return x*y;
+	else{
+		long m , x1 , x0 ,y1 , y0 , z0 , z1 , z2 ;
+		m=max(size(x),size(y))/2;
+		x1 = x/(int)pow(10,m);
+		x0 = x-x1*(int)pow(10,m);
+		y1 = y/(int)pow(10,m);
+		y0 = y-y1*(int)pow(10,m);
+		z2 = Karatsuba(x1,y1);
+		z0 = Karatsuba(x0,y0);
+		z1 = Karatsuba((x1+x0),(y1+y0))-z2-z0;
+		return z2*(int)pow(10,2*m)+z1*(int)pow(10,m)+z0;
+	}
+}
+ 
+int main()
+{
+	long a , b;
+	cin >> a >> b;
+	cout << Karatsuba(a,b) << endl;
+	return 0;
+
+
+
+
+
+2、
 https://www.cnblogs.com/grandyang/p/4395356.html
-https://www.cnblogs.com/TenosDoIt/p/3735309.html
-1\
+
 class Solution {
 public:
     string multiply(string num1, string num2) {
@@ -21,7 +68,9 @@ public:
         return res.empty() ? "0" : res;
     }
 };
-2\
+3、
+https://www.cnblogs.com/TenosDoIt/p/3735309.html
+
 class Solution {
 public:
     string multiply(string num1, string num2) {
