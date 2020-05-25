@@ -1,3 +1,39 @@
+
+ void dfs(vector<int> &nums, int pos, vector<int> &list, vector<vector<int>> &result, vector<int> &visited) {
+        if(pos == nums.size()) {
+            result.push_back(list);
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++) {
+            //注意：去重的判断条件
+            /*
+            重复一定出现在两个相同的数字，数字按照访问位置误认为是不同的，因此出现了两次
+                1. 第一个数字，肯定不重
+                2. 后面的数字和前面的数字不同，肯定不重
+                3. 后面的数字和前面的数字相同，并且前面的数字被访问过（目的是为了将两个数字看成一个整体，同增同减）
+            */
+            if(!visited[i] && (i == 0 || nums[i - 1] != nums[i] || visited[i - 1])) {
+                list.push_back(nums[i]);
+                visited[i] = 1;
+                dfs(nums, pos + 1, list, result, visited);
+                visited[i] = 0;
+                list.pop_back();
+            }
+        }
+    }
+ 
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> result;
+        vector<int> list;
+        vector<int> visited(nums.size(), 0);
+        dfs(nums, 0, list, result, visited);
+        return result;
+    }
+————————————————
+版权声明：本文为CSDN博主「Fighting_初心」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_34519487/article/details/104456788
+
 c++:
 1、
 class Solution {
