@@ -1,3 +1,32 @@
+
+dfs:
+
+    void dfs(vector<int> &nums, int pos, vector<int> &list, vector<vector<int>> &result, vector<int> visited) {
+        if(pos == nums.size()) {
+            result.push_back(list);
+            return;
+        }
+        if(pos == 0 || nums[pos - 1] != nums[pos] || visited[pos - 1]) {  //按条件选
+            list.push_back(nums[pos]);
+            visited[pos] = 1;
+            dfs(nums, pos + 1, list, result, visited);
+            //回退
+            visited[pos] = 0;
+            list.pop_back();
+        }
+        //不选
+        dfs(nums, pos + 1, list, result, visited);
+    }
+ 
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        sort(nums.begin(), nums.end());  //先排序，保证相同的数字是连着的
+        vector<vector<int>> result;
+        vector<int> list;
+        vector<int> visited(nums.size(), 0);  //是否访问过
+        dfs(nums, 0, list, result, visited);
+        return result;
+
+
 c++:
 https://www.cnblogs.com/grandyang/p/4310964.html
 1、
