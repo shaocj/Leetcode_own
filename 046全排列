@@ -1,3 +1,33 @@
+
+    void dfs(vector<int> &nums, int pos, vector<int> &list, vector<vector<int>> &result, vector<int> &visited) {
+        if(pos == nums.size()) {
+            result.push_back(list);
+            return;
+        }
+        for(int i = 0; i < nums.size(); i++) {
+            if(!visited[i]) {  //当前的位置未访问
+                list.push_back(nums[i]);
+                visited[i] = 1;
+                dfs(nums, pos + 1, list, result, visited);
+                //回退
+                visited[i] = 0;  
+                list.pop_back(); 
+            }
+        }
+    }
+ 
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> list;
+        vector<int> visited(nums.size(), 0);  //是否已经访问过（注意：先初始化为0）
+        dfs(nums, 0, list, result, visited);
+        return result;
+
+————————————————
+版权声明：本文为CSDN博主「Fighting_初心」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_34519487/article/details/104456788
+
+
 c++:
 https://www.cnblogs.com/grandyang/p/4358848.html
 1、
