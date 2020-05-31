@@ -1,4 +1,4 @@
-http://www.sohu.com/a/153858619_466939
+
 https://blog.csdn.net/hpu2022/article/details/81487979
 https://blog.csdn.net/Julialove102123/article/details/79490614
 https://blog.csdn.net/woshioosm/article/details/7438834
@@ -6,3 +6,76 @@ https://blog.csdn.net/woshioosm/article/details/7438834
 
 相关题：
 55
+
+题目链接（密码hpuacm）： 2018HPU暑期集训—动态规划入门
+
+看故事了解动态规划思想： click here！！！
+
+求解动态规划问题求到最后无非就三种方法，见我之前的博文用三中方法详细讲解了01背包问题。
+
+第一种递归搜索法：  https://blog.csdn.net/hpu2022/article/details/80741681
+
+第二种递归搜索法+记忆： https://blog.csdn.net/hpu2022/article/details/80745884
+
+第三种递推式法，此种方法最难理解，初学者可以从上两种的方法来理解： https://blog.csdn.net/hpu2022/article/details/80748651
+
+看了这么多再来简单总结下什么是动态规划：
+
+动态规划，Dynamic Programming（此处“Programming”为“规划”，而非指“程序”、“编程”），研究多步决策过程最优化问题的一种数学方法，英文缩写DP。在动态规划中，为了寻找一个问题的最优解（即最优决策过程），将整个问题划分成若干个相应的阶段，并在每个阶段都根据先前所作出的决策作出当前阶段最优决策，进而得出整个问题的最优解。
+
+能采用动态规划求解的问题的一般要具有3个性质：
+最优化原理：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。
+无后效性：即某阶段状态一旦确定，就不受这个状态以后决策的影响。也就是说，某状态以后的过程不会影响以前的状态，只与当前状态有关。
+有重叠子问题：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势）
+
+解题步骤：
+1.  拆分问题
+2.  定义状态(并找出初状态)
+3.  状态转移方程
+
+题目讲解：
+
+C题数塔问题
+
+
+有如下所示的数塔，要求从顶层走到底层，若每一步只能走到相邻的结点，则经过的结点的数字之和最大是多少？ 
+
+
+我们知道，从定点开始每次只有两个方向，左下和右下，要想知道如何走才能得到最大值，我们只需要知道它的两个子节点的如何走才能得到最大值，相同的情况我们又可以问它的子节点的子节点，这样重复下去一直都爱最后一行。
+
+故最后的状态转移方程式   dp[i][j] = num[i][j] + max(dp[i+1][j], dp[i+1][j+1]); 注意这是倒推的，就好像我们只有知道了地 i+1个才能知道第i个。仔细想一想为什么递推完成后dp[1][1]就是最大值呢？（从循环条件中找答案）
+
+#include <bits/stdc++.h>
+using namespace std;
+const int MAXN = 100+10;
+int num[MAXN][MAXN];
+int dp[MAXN][MAXN];
+ 
+int main()
+{
+    int t;
+    scanf("%d", &t);
+    while( t-- )
+    {
+        memset(dp, 0, sizeof(dp));
+        int n;
+        scanf("%d", &n);
+        for( int i=1; i<=n; i++ )
+        {
+            for( int j=1; j<=i; j++ )
+                scanf("%d", &num[i][j]);
+        }
+        for( int j=1; j<=n; j++ )
+            dp[n][j] = num[n][j];
+        for( int i = n-1; i >= 1; i-- )
+        {
+             for( int j=1; j <= i; j++ )
+             {
+                 dp[i][j] = num[i][j] + max(dp[i+1][j], dp[i+1][j+1]);
+             }
+        }
+        printf("%d\n", dp[1][1] );
+    }
+    return 0;
+}
+
