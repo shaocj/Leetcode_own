@@ -1,4 +1,5 @@
-
+前两种思路一样：
+1、
     void dfs(vector<int> &nums, int pos, vector<int> &list, vector<vector<int>> &result, vector<int> &visited) {
         if(pos == nums.size()) {
             result.push_back(list);
@@ -30,7 +31,7 @@
 
 c++:
 https://www.cnblogs.com/grandyang/p/4358848.html
-1、
+2、
 class Solution {
 public:
     vector<vector<int>> permute(vector<int>& num) {
@@ -52,7 +53,7 @@ public:
     }
 };
 
-2、
+3、
 #include <iostream>
 #include <vector>
 #include<algorithm>
