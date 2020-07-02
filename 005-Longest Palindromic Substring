@@ -22,6 +22,7 @@ class Solution(object):
 3、c
 马拉车算法：https://www.cnblogs.com/grandyang/p/4475985.html；https://blog.csdn.net/u011469138/article/details/82431327
 https://blog.csdn.net/Form_/article/details/79766986
+组成新的子串后 ，只要找到了最大的半径，就知道最长的回文子串的字符个数了，即最大半径-1；起始位置是中间位置减去半径再除以2。
 char* longestPalindrome(char* s) {
     char p[210000];
     
