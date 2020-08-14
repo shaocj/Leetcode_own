@@ -24,3 +24,4 @@
     copy(res.begin(),res.end(),out);
     cout<<endl;
     */
+3、set 有序不重复是单纯的键的集合
